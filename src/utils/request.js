@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { MessageBox, Message } from 'element-ui';
-import store from '@/store';
 import router from '@/router/router';
 
 const service = axios.create({
@@ -10,9 +9,10 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config) => {
-    if (store.getters.accessToken) {
-      config.headers.accessToken = store.getters.accessToken;
-    }
+    // if (store.getters.accessToken) {
+    //   config.headers.accessToken = store.getters.accessToken;
+    // }
+    console.log(config);
     return config;
   },
   (error) => {
@@ -37,6 +37,10 @@ service.interceptors.response.use(
         router.replace({ path: '/login' });
       }
 
+      if (res.code === 404) {
+        router.replace({ path: '/404' });
+      }
+
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
         MessageBox.confirm('请重新登陆', 'Confirm logout', {
           confirmButtonText: 'Re-Login',
@@ -53,13 +57,13 @@ service.interceptors.response.use(
     return res;
   },
   (error) => {
-    console.log(`err${error}`);
-    router.replace({ path: '/login' });
     Message({
       message: error.message,
       type: 'error',
       duration: 5 * 1000,
     });
+    console.log(`err${error}`);
+    router.replace({ path: '/login' });
     return Promise.reject(error);
   },
 );

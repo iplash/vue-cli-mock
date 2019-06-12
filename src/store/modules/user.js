@@ -1,4 +1,4 @@
-import { login, logout } from '@/api/user';
+import { login, logout } from '@/api/users';
 import { setUserInfo } from '@/utils/auth';
 
 const state = {
@@ -42,7 +42,7 @@ const actions = {
   LogOut({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout().then((response) => {
-        clearStorage();
+        sessionStorage.clear()
         commit('CLEAR_USERINFO');
         resolve(response);
       });

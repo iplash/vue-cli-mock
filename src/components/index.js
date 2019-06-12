@@ -1,5 +1,6 @@
 import Vue from 'vue';
 
+// https://webpack.js.org/guides/dependency-management/#requirecontext
 const componentsContext = require.context('./global', true, /\.js$/);
 componentsContext.keys().forEach((component) => {
   const componentConfig = componentsContext(component);

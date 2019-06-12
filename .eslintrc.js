@@ -24,13 +24,14 @@ module.exports = {
         '$scope', // for Angular 1 scopes
         'staticContext', // for ReactRouter context
         'state', // for Vuex state no-param-reassign
-      ]
+        'config', // for axios config no-param-reassign
+      ],
     }],
-    'no-shadow': ["error", {
-      "builtinGlobals": false,
-      "hoist": "functions",
-      "allow": ["state"]
-    }]
+    'no-shadow': ['error', {
+      builtinGlobals: false,
+      hoist: 'functions',
+      allow: ['state'],
+    }],
   },
   parserOptions: {
     parser: 'babel-eslint',

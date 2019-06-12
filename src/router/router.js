@@ -9,6 +9,16 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/404',
+      component: () => import('@/views/error-page/404.vue'),
+      hidden: true,
+    },
+    {
+      path: '/401',
+      component: () => import('@/views/error-page/401.vue'),
+      hidden: true,
+    },
+    {
       path: '/',
       name: 'home',
       component: Home,
