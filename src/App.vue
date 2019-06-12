@@ -12,11 +12,11 @@
 <script>
 export default {
   methods: {
-    demo(){
-      this.$store.dispatch('user/login', { username: 'admin', pwd: 'admin' })
-    }
-  }
-}
+    demo() {
+      this.$store.dispatch('user/login', { username: 'admin', pwd: 'admin' });
+    },
+  },
+};
 </script>
 
 

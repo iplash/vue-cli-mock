@@ -23,13 +23,13 @@ const getters = {
 const actions = {
   // 登录
   login({ commit }, userInfo) {
-    console.log(userInfo)
+    console.log(userInfo);
     const { username, password } = userInfo;
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), psd: password }).then((response) => {
         const { data } = response;
         const users = { accessToken: data.accessToken, userName: data.userName };
-        commit('SET_USERINFO', users);
+        commit('SET_USERINFO', { userInfo: users });
         setUserInfo(users);
         resolve();
       }).catch((error) => {
@@ -54,7 +54,7 @@ const actions = {
 
 // mutations
 const mutations = {
-  SET_USERINFO: (state, userInfo) => {
+  SET_USERINFO: (state, { userInfo }) => {
     state.userInfo = userInfo;
   },
   CLEAR_USERINFO: (state) => {
