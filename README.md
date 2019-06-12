@@ -1,3 +1,7 @@
 # vue-cli-mock
-
-use vue-cli,mockjs,axiosjs and element-ui built project infrastructure
+```bash
+git clone git@github.com:iplash/vue-cli-mock.git
+cd vue-cli-mock
+npm install
+npm run serve
+```
