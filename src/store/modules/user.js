@@ -23,10 +23,9 @@ const getters = {
 const actions = {
   // 登录
   login({ commit }, userInfo) {
-    console.log(userInfo);
-    const { username, password } = userInfo;
+    const { username, pwd } = userInfo;
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), psd: password }).then((response) => {
+      login({ username: username.trim(), pwd: pwd }).then((response) => {
         const { data } = response;
         const users = { accessToken: data.accessToken, userName: data.userName };
         commit('SET_USERINFO', { userInfo: users });
@@ -42,7 +41,7 @@ const actions = {
   LogOut({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout().then((response) => {
-        sessionStorage.clear()
+        sessionStorage.clear();
         commit('CLEAR_USERINFO');
         resolve(response);
       });

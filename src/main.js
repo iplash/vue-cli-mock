@@ -5,6 +5,7 @@ import App from './App.vue';
 import router from './router/router';
 import store from './store';
 import './components/index';
+import '../mock/index';
 
 Vue.use(Element);
 
