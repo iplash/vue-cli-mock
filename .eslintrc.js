@@ -10,6 +10,10 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    "max-len": ["error", {
+      "code": 300,
+      "ignoreRegExpLiterals": true
+    }],
     'no-param-reassign': ['error', {
       props: true,
       ignorePropertyModificationsFor: [
@@ -32,6 +36,10 @@ module.exports = {
       hoist: 'functions',
       allow: ['state'],
     }],
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": true
+    }],
+    "consistent-return": "error"
   },
   parserOptions: {
     parser: 'babel-eslint',

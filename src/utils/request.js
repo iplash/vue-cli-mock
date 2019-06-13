@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { MessageBox, Message } from 'element-ui';
-import router from '@/router/router';
+import router from '@/router';
 
 const service = axios.create({
   baseURL: process.env.serverUrl,

@@ -7,16 +7,15 @@ const state = {
 
 // getters
 const getters = {
-  cartProducts: (state, getters, rootState) => state.items.map(({ id, quantity }) => {
-    const product = rootState.products.all.find(product => product.id === id);
+  cartProducts: (state, rootState) => state.items.map(({ id, quantity }) => {
+    const product = rootState.products.all.find(item => item.id === id);
     return {
       title: product.title,
       price: product.price,
       quantity,
     };
   }),
-
-  cartTotalPrice: (state, getters) => getters.cartProducts.reduce((total, product) => total + product.price * product.quantity, 0),
+  cartTotalPrice: cart => cart.cartProducts.reduce((total, product) => total + product.price * product.quantity, 0),
 };
 
 // actions
@@ -25,12 +24,12 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, pwd } = userInfo;
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), pwd: pwd }).then((response) => {
+      login({ username, pwd }).then((response) => {
         const { data } = response;
         const users = { accessToken: data.accessToken, userName: data.userName };
         commit('SET_USERINFO', { userInfo: users });
         setUserInfo(users);
-        resolve();
+        resolve(response);
       }).catch((error) => {
         reject(error);
       });
@@ -38,15 +37,13 @@ const actions = {
   },
 
   // 登出
-  LogOut({ commit, state }) {
+  LogOut({ commit }) {
     return new Promise((resolve, reject) => {
       logout().then((response) => {
         sessionStorage.clear();
         commit('CLEAR_USERINFO');
         resolve(response);
-      });
-    }).catch((error) => {
-      reject(error);
+      }).catch(error => reject(error));
     });
   },
 };

@@ -1,0 +1,32 @@
+body {
+  padding: 0;
+  margin : 0;
+}
+
+.el-container {
+  min-height: 100vh;
+}
+
+.el-menu {
+  background-color: transparent;
+  background-color: none;
+  border          : none;
+}
+
+.el-menu-item {
+  color: #fff;
+}
+
+.el-menu-item i {
+  color: #fff;
+}
+
+.el-menu-item.is-active {
+  color: rgb(64, 158, 255);
+  background-color: rgb(38, 52, 69);
+}
+
+.el-menu-item:hover {
+  background-color: rgb(38, 52, 69);
+  color           : rgb(64, 158, 255);
+}
