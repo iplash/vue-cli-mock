@@ -3,6 +3,6 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {  
   devServer: {
-    proxy: 'http://localhost:8080'
+    proxy: `http://localhost:${port}`
   }
 };
