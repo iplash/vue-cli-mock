@@ -71,7 +71,7 @@ export default {
   color: #fff;
 }
 
-body > .el-menu {
+.el-menu {
   background-color: transparent;
   background-color: none;
   border: none;
