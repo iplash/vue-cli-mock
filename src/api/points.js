@@ -1,3 +1,5 @@
+import request from '@/utils/request';
+
 // 积分系统注册平台列表
 export function getAuthList(query) {
   return request({
@@ -139,4 +141,22 @@ export function getMinusPoints(query) {
     method: 'get',
     params: query,
   });
+}
+
+// 获取异常积分列表
+export function getPointsFails(query) {
+  return request({
+    url: 'api/addPointsFails/page',
+    method: 'get',
+    params: query
+  })
+}
+
+// 异常积分处理
+export function addPointsFails(data) {
+  return request({
+    url: 'api/addPointsFails/recover',
+    method: 'post',
+    data
+  })
 }

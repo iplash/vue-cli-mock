@@ -1,6 +1,7 @@
 body {
-  padding: 0;
-  margin : 0;
+  padding   : 0;
+  margin    : 0;
+  background: #f0f2f5;
 }
 
 .el-container {
@@ -22,11 +23,23 @@ body {
 }
 
 .el-menu-item.is-active {
-  color: rgb(64, 158, 255);
   background-color: rgb(38, 52, 69);
 }
 
 .el-menu-item:hover {
   background-color: rgb(38, 52, 69);
   color           : rgb(64, 158, 255);
+}
+
+.filter-container {
+  padding-bottom: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
 }

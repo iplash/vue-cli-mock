@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { MessageBox, Message } from 'element-ui';
 import router from '@/router';
+import store from '@/store';
 
 const service = axios.create({
-  baseURL: process.env.serverUrl,
+  baseURL: 'http://192.168.98.13:7555',
   timeout: 5000,
 });
 
 service.interceptors.request.use(
-  (config) => {
-    // if (store.getters.accessToken) {
-    //   config.headers.accessToken = store.getters.accessToken;
-    // }
-    console.log(config);
+  (config) => {  
+    if (store.getters.accessToken) {
+      config.headers.accessToken = store.getters.accessToken;
+    }
     return config;
   },
   (error) => {

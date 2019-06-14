@@ -1,8 +1,8 @@
 import { login, logout } from '@/api/users';
-import { setUserInfo } from '@/utils/auth';
+import { setUserInfo, getUserInfo } from '@/utils/auth';
 
 const state = {
-  userInfo: {},
+  userInfo: getUserInfo(),
 };
 
 // getters
@@ -22,9 +22,9 @@ const getters = {
 const actions = {
   // 登录
   login({ commit }, userInfo) {
-    const { username, pwd } = userInfo;
+    const { username, psd } = userInfo;
     return new Promise((resolve, reject) => {
-      login({ username, pwd }).then((response) => {
+      login({ username, psd }).then((response) => {
         const { data } = response;
         const users = { accessToken: data.accessToken, userName: data.userName };
         commit('SET_USERINFO', { userInfo: users });

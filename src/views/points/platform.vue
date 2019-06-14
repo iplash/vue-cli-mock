@@ -74,19 +74,23 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <pagination
+      v-show="total>0"
+      :total="total"
+      :page.sync="listQuery.pageNum"
+      :limit.sync="listQuery.pageSize"
+      @pagination="getList"
+    />
   </div>
 </template>
 
 <script>
-import {
-  getAuthList,
-  openOrDown,
-  updateRights,
-  deletePlatForm,
-  addPlatform,
-} from '@/api/points';
+import { getAuthList, openOrDown, updateRights, deletePlatForm, addPlatform } from '@/api/points';
+import Pagination from "@/components/Pagination";
 
 export default {
+  components: { Pagination },
   data() {
     return {
       form: {
@@ -107,12 +111,11 @@ export default {
       total: 0,
       listQuery: {
         pageNum: 1,
-        pageSize: 20,
+        pageSize: 10,
       },
     };
   },
   created() {
-    console.log('2');
     this.getList();
   },
   methods: {
@@ -196,18 +199,3 @@ export default {
   },
 };
 </script>
-
-<style rel="stylesheet/scss" lang="scss">
-.app-container {
-  padding: 20px;
-}
-.filter-container {
-  padding-bottom: 10px;
-
-  .filter-item {
-    display: inline-block;
-    vertical-align: middle;
-    margin-bottom: 10px;
-  }
-}
-</style>

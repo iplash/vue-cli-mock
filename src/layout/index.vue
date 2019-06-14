@@ -1,87 +1,116 @@
 <template>
   <el-container>
-    <el-aside width="180px">
+    <el-aside style="width: auth">
       <el-menu
-        default-active="1-4-1"
-        class="el-menu-vertical-demo"
+        :default-active="key"
+        class="el-menu-vertical"
         @open="handleOpen"
         @close="handleClose"
         :collapse="isCollapse"
+        text-color="#fff"
+        active-text-color="#409eff"
       >
-        <el-menu-item index="1">
-          <i class="el-icon-menu"></i>
-          <span slot="title">平台设置</span>
-        </el-menu-item>
-        <el-menu-item index="2">
-          <i class="el-icon-document"></i>
-          <span slot="title">积分设置</span>
-        </el-menu-item>
-        <el-menu-item index="3">
-          <i class="el-icon-setting"></i>
-          <span slot="title">积分活动</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-menu"></i>
-          <span slot="title">用户列表</span>
-        </el-menu-item>
-        <el-menu-item index="5">
-          <i class="el-icon-document"></i>
-          <span slot="title">积分流水</span>
-        </el-menu-item>
-        <el-menu-item index="6">
-          <i class="el-icon-setting"></i>
-          <span slot="title">异常积分</span>
+        <el-menu-item
+          v-for="route in menus"
+          :key="route.path"
+          :base-path="route.path"
+          :index="`/points/${route.path}`"
+          @click="changeRoute(`/points/${route.path}`)"
+        >
+          <i :class="route.meta.icon"></i>
+          <span slot="title">{{route.name}}</span>
         </el-menu-item>
       </el-menu>
     </el-aside>
     <el-container>
-      <el-header>Header</el-header>
-      <el-main>Main</el-main>
-      <el-footer>Footer</el-footer>
+      <el-header>
+        <i
+          :class="`el-icon-s-${ isCollapse ? 'unfold' : 'fold' }`"
+          style="font-size: 28px; cursor: pointer;"
+          @click="changeIsCollapse"
+        ></i>
+        <span></span>
+      </el-header>
+      <el-main>
+        <transition name="fade-transform" mode="out-in">
+          <keep-alive>
+            <router-view :key="key"/>
+          </keep-alive>
+        </transition>
+      </el-main>
+      <el-footer>Integral Management System ©2019 Created by Didida Group.</el-footer>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import router from '../router';
+
 export default {
-  name: "Layout",
+  name: 'Layout',
+  data() {
+    return {
+      isCollapse: true,
+    };
+  },
   components: {},
-  computed: {},
-  methods: {}
+  computed: {
+    key() {
+      return this.$route.path;
+    },
+    menus() {
+      const {
+        options: { routes },
+      } = router;
+      return routes[routes.length - 1].children;
+    },
+  },
+  methods: {
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    changeIsCollapse() {
+      this.isCollapse = !this.isCollapse;
+    },
+    changeRoute(url) {
+      router.push(url);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .el-header,
 .el-footer {
-  background-color: #b3c0d1;
-  color: #333;
   text-align: center;
   line-height: 60px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+}
+
+.el-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.el-main {
+  background-color: #FFF;
+  color: #333;
+  text-align: left;
 }
 
 .el-aside {
   background-color: #304156;
   color: #fff;
   text-align: center;
-  line-height: 200px;
 }
 
-.el-menu-item i {
-  color: #fff;
-}
-
-.el-menu {
-  background-color: transparent;
-  background-color: none;
-  border: none;
-}
-
-.el-main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
+.el-menu-vertical:not(.el-menu--collapse) {
+  width: 176px;
 }
 
 body > .el-container {

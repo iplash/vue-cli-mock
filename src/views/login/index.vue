@@ -21,14 +21,14 @@
           placeholder="请输入用户名"
         />
       </el-form-item>
-      <el-form-item prop="pwd">
+      <el-form-item prop="psd">
         <span class="svg-container">
           <i class="el-icon-lock"></i>
         </span>
         <el-input
           :type="pwdType"
-          v-model="loginForm.pwd"
-          name="pwd"
+          v-model="loginForm.psd"
+          name="psd"
           auto-complete="on"
           placeholder="请输入用户密码"
           @keyup.enter.native="handleLogin"
@@ -71,11 +71,11 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        pwd: 'admin',
+        psd: 'admin',
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        pwd: [{ required: true, trigger: 'blur', validator: validatePass }],
+        psd: [{ required: true, trigger: 'blur', validator: validatePass }],
       },
       loading: false,
       pwdType: 'password',
