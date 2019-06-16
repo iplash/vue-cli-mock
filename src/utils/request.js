@@ -4,7 +4,7 @@ import router from '@/router';
 import store from '@/store';
 
 const service = axios.create({
-  baseURL: 'http://192.168.98.13:7555',
+  // baseURL: 'http://192.168.98.13:7555',
   timeout: 5000,
 });
 
